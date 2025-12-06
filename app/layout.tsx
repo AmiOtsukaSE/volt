@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import HackathonTicker from "./components/HackathonTicker";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -55,6 +56,7 @@ export default function RootLayout({
               </nav>
             </div>
           </header>
+          <HackathonTicker />
           <main>{children}</main>
         </div>
       </body>
