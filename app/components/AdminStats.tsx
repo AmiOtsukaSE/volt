@@ -1,4 +1,5 @@
 import { sql } from "@vercel/postgres";
+import { unstable_noStore as noStore } from "next/cache";
 
 // Cache DB reads for 60 seconds to avoid hammering the database.
 export const revalidate = 60;
@@ -10,6 +11,9 @@ type ActivityLog = {
 };
 
 export default async function AdminStats() {
+  // Disable static caching so we always read the latest activity row.
+  noStore();
+
   const hasPostgres =
     Boolean(process.env.POSTGRES_URL) ||
     Boolean(process.env.POSTGRES_URL_NON_POOLING) ||
