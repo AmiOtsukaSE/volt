@@ -100,10 +100,8 @@ export default function Home() {
             </div>
             <UrgencyBadge urgency={urgency} />
           </div>
-          <div className="mt-6 grid gap-4 sm:grid-cols-4">
-            {countdown.units.map((unit) => (
-              <CountdownCard key={unit.label} unit={unit} urgency={urgency} />
-            ))}
+          <div className="mt-6 rounded-2xl border border-white/10 bg-black/30 px-4 py-3">
+            <CountdownTicker units={countdown.units} urgency={urgency} />
           </div>
           <div className="mt-6 space-y-3">
             <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-300">
@@ -335,18 +333,22 @@ type UrgencyVariant = ReturnType<typeof getUrgencyVariant>;
 
 type Milestone = (typeof milestones)[number];
 
-function CountdownCard({ unit, urgency }: { unit: CountdownUnit; urgency: UrgencyVariant }) {
+function CountdownTicker({ units, urgency }: { units: CountdownUnit[]; urgency: UrgencyVariant }) {
   return (
-    <div className="rounded-2xl border border-white/10 bg-black/30 p-4 text-center">
-      <p className="text-xs uppercase tracking-[0.4em] text-white/50">{unit.label}</p>
-      <motion.p
-        key={unit.value}
-        initial={{ y: 10, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        className={`mt-2 text-3xl font-black ${urgency.textColor}`}
-      >
-        {unit.value.toString().padStart(2, "0")}
-      </motion.p>
+    <div className="flex flex-nowrap items-baseline gap-6 overflow-x-auto text-2xl font-black sm:text-3xl">
+      {units.map((unit) => (
+        <div key={unit.label} className="flex items-baseline gap-2 whitespace-nowrap">
+          <motion.span
+            key={`${unit.label}-${unit.value}`}
+            initial={{ y: 10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            className={urgency.textColor}
+          >
+            {unit.value.toString().padStart(2, "0")}
+          </motion.span>
+          <span className="text-sm font-semibold text-white/60">{unit.label}</span>
+        </div>
+      ))}
     </div>
   );
 }
