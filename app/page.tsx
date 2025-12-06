@@ -65,6 +65,8 @@ const motivationPool = [
 export default function Home() {
   const [now, setNow] = useState<Date | null>(null);
   const [message, setMessage] = useState(motivationPool[0]);
+  const [visitCount, setVisitCount] = useState<number | null>(null);
+  const [visitCounterStatus, setVisitCounterStatus] = useState<"loading" | "ready" | "disabled">("loading");
 
   useEffect(() => {
     const pickMessage = () => {
@@ -78,6 +80,25 @@ export default function Home() {
     tick();
     const interval = setInterval(tick, 1000);
     return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const incrementVisits = async () => {
+      try {
+        const response = await fetch("/api/visits", { method: "POST" });
+        if (!response.ok) throw new Error("Failed to update visit counter");
+        const payload = (await response.json()) as { count?: number; kvConfigured?: boolean };
+        if (typeof payload.count === "number") {
+          setVisitCount(payload.count);
+        }
+        setVisitCounterStatus(payload.kvConfigured === false ? "disabled" : "ready");
+      } catch (error) {
+        console.error(error);
+        setVisitCounterStatus("disabled");
+      }
+    };
+
+    incrementVisits();
   }, []);
 
   const effectiveNow = now ?? HACKATHON_START;
@@ -111,6 +132,9 @@ export default function Home() {
           </div>
           <div className="mt-6 rounded-2xl border border-white/10 bg-black/30 px-4 py-3">
             <CountdownTicker units={countdown.units} urgency={urgency} />
+          </div>
+          <div className="mt-4 flex flex-wrap gap-4">
+            <VisitCounterCard count={visitCount} status={visitCounterStatus} />
           </div>
           <div className="mt-6 space-y-3">
             <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-300">
@@ -360,6 +384,23 @@ function CountdownTicker({ units, urgency }: { units: CountdownUnit[]; urgency: 
           <span className="text-sm font-semibold text-white/60">{unit.label}</span>
         </div>
       ))}
+    </div>
+  );
+}
+
+function VisitCounterCard({ count, status }: { count: number | null; status: "loading" | "ready" | "disabled" }) {
+  const helperLabel = status === "disabled" ? "KV未設定" : status === "loading" ? "同期中..." : "Vercel KV";
+
+  return (
+    <div className="flex min-w-0 flex-1 items-center justify-between rounded-2xl border border-white/10 bg-white/5 px-5 py-4">
+      <div>
+        <p className="text-xs uppercase tracking-[0.4em] text-cyan-200">アクセス数</p>
+        <p className="text-sm text-slate-300">このダッシュボードの訪問総数</p>
+      </div>
+      <div className="text-right">
+        <p className="text-3xl font-black text-white">{count !== null ? count.toLocaleString() : "--"}</p>
+        <p className="text-[10px] text-white/40">{helperLabel}</p>
+      </div>
     </div>
   );
 }
