@@ -576,8 +576,8 @@ function ActivityStatusCard({ state }: { state: ActivityState }) {
     helper = "APIレスポンスを確認してください";
   }
 
-  const keystrokesDisplay = isReady ? data.keystrokes.toLocaleString() : "--";
-  const clicksDisplay = isReady ? data.clicks.toLocaleString() : "--";
+  const keystrokesDisplay = isReady && data ? data.keystrokes.toLocaleString() : "--";
+  const clicksDisplay = isReady && data ? data.clicks.toLocaleString() : "--";
   const videoSrc = isOnline ? "/working.mp4" : "/sleeping.mp4";
   const videoCaption = isOnline ? "Live: 作業中" : "Live: 休憩モード";
 
