@@ -13,16 +13,16 @@ export default function HackathonTicker() {
   }, []);
 
   return (
-    <div className="border-b border-emerald-500/20 bg-[rgba(3,16,12,0.9)] px-4 py-3 text-emerald-100 backdrop-blur">
+    <div className="border-b border-orange-200/70 bg-white/80 px-4 py-3 text-slate-700 backdrop-blur">
       <div className="mx-auto flex max-w-6xl flex-col gap-2 text-xs sm:flex-row sm:items-center sm:justify-between sm:text-sm">
-        <p className="text-[10px] font-mono uppercase tracking-[0.5em] text-emerald-400">
+        <p className="text-xs font-mono font-bold uppercase tracking-[0.35em] text-orange-400 sm:text-sm">
           ハッカソン終了まで
         </p>
-        <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1 font-mono text-lg sm:text-xl">
+        <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1 font-mono text-lg text-slate-900 sm:text-xl">
           {countdown.units.map((unit) => (
             <span key={unit.label} className="flex items-baseline gap-1">
-              <span className="text-emerald-200">{unit.value.toString().padStart(2, "0")}</span>
-              <span className="text-[10px] uppercase tracking-[0.3em] text-emerald-500">{unit.label}</span>
+              <span className="text-orange-500">{unit.value.toString().padStart(2, "0")}</span>
+              <span className="text-[10px] uppercase tracking-[0.3em] text-slate-400">{unit.label}</span>
             </span>
           ))}
         </div>

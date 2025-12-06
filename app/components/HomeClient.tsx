@@ -67,6 +67,9 @@ const motivationPool = [
   "AI上司: 「休むのは提出ボタンを押してからだ。」",
 ];
 
+const panelBaseClass =
+  "rounded-3xl border border-orange-100/80 bg-white/90 p-6 shadow-[0_18px_60px_rgba(255,173,133,0.18)] backdrop-blur";
+
 type HomeClientProps = {
   adminStatsSlot: ReactNode;
 };
@@ -178,36 +181,35 @@ export default function HomeClient({ adminStatsSlot }: HomeClientProps) {
   const remainingPercent = Math.max(0, 100 - elapsedPercent);
 
   return (
-    <div className="relative min-h-screen bg-[#04040a] text-white">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(0,153,255,0.25),_transparent_60%)]" />
-      <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(0,0,0,0.9),rgba(10,22,41,0.92))]" />
-      <div className="relative z-10 mx-auto flex min-h-screen max-w-5xl flex-col gap-6 px-4 py-10">
-        <section className="rounded-3xl border border-white/10 bg-white/5 p-6">
+    <div className="relative min-h-screen bg-gradient-to-b from-[#fff8f0] via-[#fffdf9] to-[#ffe7db] text-slate-900">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-72 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.9),_transparent_65%)]" />
+      <div className="relative z-10 mx-auto flex min-h-screen max-w-5xl flex-col gap-8 px-4 py-10">
+        <section className={panelBaseClass}>
           <div className="flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-2xl">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-orange-100 bg-orange-50 text-2xl">
               <span role="img" aria-label="laptop woman">
                 👩‍💻
               </span>
             </div>
             <div>
-              <p className="text-xs uppercase tracking-[0.4em] text-slate-300">Now</p>
-              <h2 className="text-xl font-bold text-white">今の大塚あみ</h2>
+              <p className="text-xs uppercase tracking-[0.35em] text-orange-400">Now</p>
+              <h2 className="text-xl font-bold text-slate-900">今の大塚あみ</h2>
             </div>
           </div>
-          <div className="mt-5 rounded-2xl border border-white/10 bg-slate-950/50 p-5">
+          <div className="mt-5 rounded-2xl border border-orange-100 bg-orange-50/60 p-5">
             <ActivityStatusCard state={activityStatus} />
           </div>
         </section>
 
-        <section className="rounded-3xl border border-white/10 bg-white/5 p-6">
+        <section className={panelBaseClass}>
           <div className="flex items-center gap-3">
-            <AlarmClock className="h-6 w-6 text-slate-200" />
+            <AlarmClock className="h-6 w-6 text-orange-400" />
             <div>
-              <p className="text-xs uppercase tracking-[0.4em] text-slate-300">Overview</p>
-              <h2 className="text-xl font-bold text-white">このチャレンジの概要</h2>
+              <p className="text-xs uppercase tracking-[0.35em] text-orange-400">Overview</p>
+              <h2 className="text-xl font-bold text-slate-900">このチャレンジの概要</h2>
             </div>
           </div>
-          <div className="mt-5 space-y-5 text-sm leading-relaxed text-slate-100">
+          <div className="mt-5 space-y-5 text-sm leading-relaxed text-slate-600">
             <p>
               12月6日 9:00 — AI上司の指示によりハッカソン参加が決定。締め切りは 12月8日（月）午前3:00。
               詳細はクイックリソース内の「ハッカソン概要ページ」を参照。
@@ -223,19 +225,19 @@ export default function HomeClient({ adminStatsSlot }: HomeClientProps) {
           </div>
         </section>
 
-        <section className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-[0_25px_80px_rgba(0,0,0,0.45)]">
+        <section className={`${panelBaseClass} shadow-[0_20px_80px_rgba(255,173,133,0.25)]`}>
           <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
             <div>
-              <p className="text-xs font-mono tracking-[0.4em] text-slate-300">ハッカソン・ミッションコントロール</p>
-              <h1 className="mt-3 text-3xl font-black text-white">ハッカソン終了まで</h1>
-              <p className="text-sm text-slate-300">ミッション: 制限時間内にアプリを作成し、ハッカソンに投稿せよ</p>
+              <p className="text-xs font-mono tracking-[0.4em] text-orange-400">ハッカソン・ミッションコントロール</p>
+              <h1 className="mt-3 text-3xl font-black text-slate-900">ハッカソン終了まで</h1>
+              <p className="text-sm text-slate-600">ミッション: 制限時間内にアプリを作成し、ハッカソンに投稿せよ</p>
               <p className="text-xs text-slate-400">
                 開始: 12月6日 午前3:00 / 締切: 12月8日 午前3:00 （日本時間）
               </p>
             </div>
             <UrgencyBadge urgency={urgency} />
           </div>
-          <div className="mt-6 rounded-2xl border border-white/10 bg-black/30 px-4 py-3">
+          <div className="mt-6 rounded-2xl border border-orange-100 bg-orange-50/70 px-4 py-3">
             <CountdownTicker units={countdown.units} urgency={urgency} />
           </div>
           <div className="mt-4 flex flex-wrap gap-4">
@@ -243,7 +245,7 @@ export default function HomeClient({ adminStatsSlot }: HomeClientProps) {
             {adminStatsSlot}
           </div>
           <div className="mt-6 space-y-3">
-            <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-300">
+            <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
               <span>
                 総時間 {timeProgress.totalHours}時間 / 経過 {elapsedPercent.toFixed(1)}%
               </span>
@@ -251,7 +253,7 @@ export default function HomeClient({ adminStatsSlot }: HomeClientProps) {
                 残り {Math.max(countdown.totalHoursLeft, 0).toFixed(1)}時間 ({remainingPercent.toFixed(1)}%)
               </span>
             </div>
-            <div className="relative h-5 w-full overflow-visible rounded-full bg-white/10">
+            <div className="relative h-5 w-full overflow-visible rounded-full bg-orange-100/60">
               <motion.div
                 className="absolute inset-y-0 left-0 h-full rounded-full"
                 style={{ width: `${elapsedPercent}%` }}
@@ -261,8 +263,8 @@ export default function HomeClient({ adminStatsSlot }: HomeClientProps) {
               <div className="pointer-events-none absolute inset-0 flex justify-between px-2">
                 {progressMarkers.map((marker) => (
                   <div key={marker} className="relative flex h-full w-px justify-center">
-                    <span className="block h-full w-px bg-white/25" />
-                    <span className="absolute top-full mt-1 -translate-x-1/2 text-[10px] text-white/40">
+                    <span className="block h-full w-px bg-orange-200" />
+                    <span className="absolute top-full mt-1 -translate-x-1/2 text-[10px] text-slate-400">
                       {marker}%
                     </span>
                   </div>
@@ -272,30 +274,13 @@ export default function HomeClient({ adminStatsSlot }: HomeClientProps) {
           </div>
         </section>
 
-        <section className="rounded-3xl border border-white/10 bg-white/5 p-6">
-          <div className="flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-2xl">
-              <span role="img" aria-label="laptop woman">
-                👩‍💻
-              </span>
-            </div>
-            <div>
-              <p className="text-xs uppercase tracking-[0.4em] text-slate-300">Now</p>
-              <h2 className="text-xl font-bold text-white">今の大塚あみ</h2>
-            </div>
-          </div>
-          <div className="mt-5 rounded-2xl border border-white/10 bg-slate-950/50 p-5">
-            <ActivityStatusCard state={activityStatus} />
-          </div>
-        </section>
-
         <div className="grid flex-1 gap-6 lg:grid-cols-3">
-          <section className="rounded-3xl border border-white/10 bg-white/5 p-5 lg:col-span-2">
+          <section className={`${panelBaseClass} p-5 lg:col-span-2`}>
             <div className="flex items-center gap-3">
-              <SignalHigh className="h-6 w-6 text-cyan-300" />
+              <SignalHigh className="h-6 w-6 text-sky-500" />
               <div>
-                <p className="text-xs uppercase tracking-[0.4em] text-cyan-200">マイルストーン・タイムライン</p>
-                <h2 className="text-xl font-bold">進行状況タイムライン</h2>
+                <p className="text-xs uppercase tracking-[0.35em] text-sky-500">マイルストーン・タイムライン</p>
+                <h2 className="text-xl font-bold text-slate-900">進行状況タイムライン</h2>
               </div>
             </div>
             <div className="mt-6 space-y-4">
@@ -305,12 +290,12 @@ export default function HomeClient({ adminStatsSlot }: HomeClientProps) {
             </div>
           </section>
 
-          <section className="rounded-3xl border border-white/10 bg-white/5 p-5">
+          <section className={`${panelBaseClass} p-5`}>
             <div className="flex items-center gap-3">
-              <Gauge className="h-6 w-6 text-purple-300" />
+              <Gauge className="h-6 w-6 text-purple-500" />
               <div>
-                <p className="text-xs uppercase tracking-[0.4em] text-purple-200">タスク概況</p>
-                <h2 className="text-xl font-bold">ステータス一覧</h2>
+                <p className="text-xs uppercase tracking-[0.35em] text-purple-500">タスク概況</p>
+                <h2 className="text-xl font-bold text-slate-900">ステータス一覧</h2>
               </div>
             </div>
             <div className="mt-6 space-y-2">
@@ -322,12 +307,12 @@ export default function HomeClient({ adminStatsSlot }: HomeClientProps) {
         </div>
 
         <div className="grid gap-6 lg:grid-cols-2">
-          <section className="rounded-3xl border border-white/10 bg-white/5 p-5">
+          <section className={`${panelBaseClass} p-5`}>
             <div className="flex items-center gap-3">
-              <Link2 className="h-6 w-6 text-emerald-300" />
+              <Link2 className="h-6 w-6 text-emerald-500" />
               <div>
-                <p className="text-xs uppercase tracking-[0.4em] text-emerald-200">司令リンク集</p>
-                <h2 className="text-xl font-bold">クイックリソース</h2>
+                <p className="text-xs uppercase tracking-[0.35em] text-emerald-500">司令リンク集</p>
+                <h2 className="text-xl font-bold text-slate-900">クイックリソース</h2>
               </div>
             </div>
             <div className="mt-5 grid gap-3">
@@ -337,77 +322,77 @@ export default function HomeClient({ adminStatsSlot }: HomeClientProps) {
                   href={resource.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center justify-between rounded-2xl border border-emerald-300/30 bg-emerald-300/5 px-4 py-3 text-sm font-semibold text-emerald-100 transition hover:border-emerald-300 hover:bg-emerald-300/10"
+                  className="flex items-center justify-between rounded-2xl border border-emerald-100 bg-emerald-50/70 px-4 py-3 text-sm font-semibold text-emerald-700 transition hover:bg-white"
                 >
                   <div className="flex items-center gap-3">
-                    <resource.icon className="h-5 w-5 text-emerald-200" />
+                    <resource.icon className="h-5 w-5 text-emerald-500" />
                     <span>{resource.label}</span>
                   </div>
-                  <span className="text-xs uppercase tracking-[0.3em]">開く</span>
+                  <span className="text-xs uppercase tracking-[0.3em] text-emerald-400">開く</span>
                 </a>
               ))}
             </div>
           </section>
 
-          <section className="rounded-3xl border border-white/10 bg-gradient-to-br from-[#101025] to-[#05050d] p-5">
+          <section className={`${panelBaseClass} p-5`}>
             <div className="flex items-center gap-3">
-              <Flag className="h-6 w-6 text-yellow-300" />
+              <Flag className="h-6 w-6 text-pink-500" />
               <div>
-                <p className="text-xs uppercase tracking-[0.4em] text-yellow-200">チームモチベ</p>
-                <h2 className="text-xl font-bold">励ましフィード</h2>
+                <p className="text-xs uppercase tracking-[0.35em] text-pink-500">チームモチベ</p>
+                <h2 className="text-xl font-bold text-slate-900">励ましフィード</h2>
               </div>
             </div>
-            <div className="mt-4 rounded-2xl border border-yellow-300/30 bg-black/40 px-4 py-5 text-center text-sm font-semibold text-yellow-100 shadow-[0_10px_40px_rgba(255,209,92,0.2)]">
+            <div className="mt-4 rounded-2xl border border-pink-100 bg-pink-50/80 px-4 py-5 text-center text-sm font-semibold text-pink-700 shadow-[0_10px_30px_rgba(255,171,188,0.35)]">
               {message}
             </div>
           </section>
         </div>
 
-        <section className="rounded-3xl border border-white/10 bg-white/5 p-6">
+        <section className={panelBaseClass}>
           <div className="flex items-center gap-3">
-            <SignalHigh className="h-6 w-6 text-sky-300" />
+            <SignalHigh className="h-6 w-6 text-sky-500" />
             <div>
-              <p className="text-xs uppercase tracking-[0.4em] text-sky-300">直近の予定</p>
-              <h2 className="text-xl font-bold text-white">Next Appearances</h2>
+              <p className="text-xs uppercase tracking-[0.35em] text-sky-500">直近の予定</p>
+              <h2 className="text-xl font-bold text-slate-900">Next Appearances</h2>
             </div>
           </div>
-          <div className="mt-4 space-y-4 text-sm text-slate-100">
+          <div className="mt-4 space-y-4 text-sm text-slate-600">
             <a
               href="https://event.shoeisha.jp/devboost/20251206"
               target="_blank"
               rel="noreferrer"
-              className="flex flex-col rounded-2xl border border-sky-400/40 bg-sky-900/20 px-4 py-3 transition hover:border-white"
+              className="flex flex-col rounded-2xl border border-sky-100 bg-sky-50/70 px-4 py-3 transition hover:bg-white"
             >
-              <span className="text-xs uppercase tracking-[0.4em] text-sky-300">12月6日 13:00</span>
-              <span className="text-base font-semibold text-white">Developers Boost 登壇</span>
+              <span className="text-xs uppercase tracking-[0.35em] text-sky-400">12月6日 13:00</span>
+              <span className="text-base font-semibold text-slate-900">Developers Boost 登壇</span>
             </a>
             <a
               href="https://rihe.hiroshima-u.ac.jp/2025/11/12-7-icp-2025/"
               target="_blank"
               rel="noreferrer"
-              className="flex flex-col rounded-2xl border border-sky-400/40 bg-sky-900/20 px-4 py-3 transition hover:border-white"
+              className="flex flex-col rounded-2xl border border-sky-100 bg-sky-50/70 px-4 py-3 transition hover:bg-white"
             >
-              <span className="text-xs uppercase tracking-[0.4em] text-sky-300">12月7日 13:00</span>
-              <span className="text-base font-semibold text-white">外語大 講演</span>
+              <span className="text-xs uppercase tracking-[0.35em] text-sky-400">12月7日 13:00</span>
+              <span className="text-base font-semibold text-slate-900">外語大 講演</span>
             </a>
           </div>
         </section>
 
-        <section className="rounded-3xl border border-white/10 bg-gradient-to-r from-[#0a111c] via-[#111a2a] to-[#0c101b] p-6">
+        <section className={`${panelBaseClass} bg-gradient-to-r from-white to-white`}>
           <div className="flex items-center gap-3">
-            <Flag className="h-6 w-6 text-emerald-300" />
+            <Flag className="h-6 w-6 text-emerald-500" />
             <div>
-              <p className="text-xs uppercase tracking-[0.4em] text-emerald-300">Message</p>
-              <h2 className="text-xl font-bold text-white">応援のお願い</h2>
+              <p className="text-xs uppercase tracking-[0.35em] text-emerald-500">Message</p>
+              <h2 className="text-xl font-bold text-slate-900">応援のお願い</h2>
             </div>
           </div>
-          <p className="mt-4 text-sm leading-relaxed text-emerald-100">
+          <p className="mt-4 text-sm leading-relaxed text-slate-600">
             X（
             <a
               href="https://x.com/AmiOtsuka_SE"
               target="_blank"
               rel="noreferrer"
-              className="underline decoration-emerald-300 decoration-dashed underline-offset-4"
+              className="text-emerald-500 underline decoration-emerald-400 decoration-dashed underline-offset-4"
             >
               @AmiOtsuka_SE
             </a>
@@ -415,28 +400,28 @@ export default function HomeClient({ adminStatsSlot }: HomeClientProps) {
           </p>
         </section>
 
-        <section className="rounded-3xl border border-white/10 bg-white/5 p-6">
+        <section className={panelBaseClass}>
           <div className="flex items-center gap-3">
             <QuestionAnswerIcon />
             <div>
-              <p className="text-xs uppercase tracking-[0.4em] text-slate-300">Q&A</p>
-              <h2 className="text-xl font-bold text-white">よくある質問</h2>
+              <p className="text-xs uppercase tracking-[0.35em] text-orange-400">Q&A</p>
+              <h2 className="text-xl font-bold text-slate-900">よくある質問</h2>
             </div>
           </div>
-          <dl className="mt-5 space-y-4 text-sm text-slate-100">
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-              <dt className="font-semibold text-white">Q. プログラムがpublicになっていますが大丈夫ですか？</dt>
-              <dd className="mt-1 text-slate-200">A. 大丈夫です。これはハッカソンの要件です。</dd>
+          <dl className="mt-5 space-y-4 text-sm text-slate-600">
+            <div className="rounded-2xl border border-orange-50 bg-orange-50/80 p-4">
+              <dt className="font-semibold text-slate-900">Q. プログラムがpublicになっていますが大丈夫ですか？</dt>
+              <dd className="mt-1 text-slate-600">A. 大丈夫です。これはハッカソンの要件です。</dd>
             </div>
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-              <dt className="font-semibold text-white">Q. ちょっと作ってみました。プルリク送っていいですか？</dt>
-              <dd className="mt-1 text-slate-200">
+            <div className="rounded-2xl border border-orange-50 bg-orange-50/80 p-4">
+              <dt className="font-semibold text-slate-900">Q. ちょっと作ってみました。プルリク送っていいですか？</dt>
+              <dd className="mt-1 text-slate-600">
                 A. 必ず採用するとは限りませんが、大丈夫です。
               </dd>
             </div>
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-              <dt className="font-semibold text-white">Q. なんでこのような企画を始めたのですか？</dt>
-              <dd className="mt-1 text-slate-200">A. AI上司のみぞ知ることです。</dd>
+            <div className="rounded-2xl border border-orange-50 bg-orange-50/80 p-4">
+              <dt className="font-semibold text-slate-900">Q. なんでこのような企画を始めたのですか？</dt>
+              <dd className="mt-1 text-slate-600">A. AI上司のみぞ知ることです。</dd>
             </div>
           </dl>
         </section>
@@ -447,7 +432,7 @@ export default function HomeClient({ adminStatsSlot }: HomeClientProps) {
 
 function QuestionAnswerIcon() {
   return (
-    <div className="flex h-10 w-10 items-center justify-center rounded-2xl border border-white/20 bg-white/10 text-white">
+    <div className="flex h-10 w-10 items-center justify-center rounded-2xl border border-orange-200 bg-orange-50 text-orange-500">
       Q&A
     </div>
   );
@@ -457,7 +442,7 @@ type Milestone = (typeof milestones)[number];
 
 function CountdownTicker({ units, urgency }: { units: CountdownUnit[]; urgency: UrgencyVariant }) {
   return (
-    <div className="flex flex-nowrap items-baseline gap-6 overflow-x-auto text-2xl font-black sm:text-3xl">
+    <div className="flex flex-nowrap items-baseline gap-6 overflow-x-auto text-2xl font-black text-slate-900 sm:text-3xl">
       {units.map((unit) => (
         <div key={unit.label} className="flex items-baseline gap-2 whitespace-nowrap">
           <motion.span
@@ -468,7 +453,7 @@ function CountdownTicker({ units, urgency }: { units: CountdownUnit[]; urgency: 
           >
             {unit.value.toString().padStart(2, "0")}
           </motion.span>
-          <span className="text-sm font-semibold text-white/60">{unit.label}</span>
+          <span className="text-sm font-semibold text-slate-400">{unit.label}</span>
         </div>
       ))}
     </div>
@@ -479,14 +464,14 @@ function VisitCounterCard({ count, status }: { count: number | null; status: "lo
   const helperLabel = status === "disabled" ? "KV未設定" : status === "loading" ? "同期中..." : "Vercel KV";
 
   return (
-    <div className="flex min-w-0 flex-1 items-center justify-between rounded-2xl border border-white/10 bg-white/5 px-5 py-4">
+    <div className="flex min-w-0 flex-1 items-center justify-between rounded-2xl border border-orange-100 bg-white px-5 py-4 shadow-sm">
       <div>
-        <p className="text-xs uppercase tracking-[0.4em] text-cyan-200">アクセス数</p>
-        <p className="text-sm text-slate-300">このダッシュボードの訪問総数</p>
+        <p className="text-xs uppercase tracking-[0.35em] text-orange-400">アクセス数</p>
+        <p className="text-sm text-slate-500">このダッシュボードの訪問総数</p>
       </div>
       <div className="text-right">
-        <p className="text-3xl font-black text-white">{count !== null ? count.toLocaleString() : "--"}</p>
-        <p className="text-[10px] text-white/40">{helperLabel}</p>
+        <p className="text-3xl font-black text-slate-900">{count !== null ? count.toLocaleString() : "--"}</p>
+        <p className="text-[10px] text-slate-400">{helperLabel}</p>
       </div>
     </div>
   );
@@ -496,17 +481,17 @@ type Task = (typeof tasks)[number];
 
 function TaskItem({ task }: { task: Task }) {
   const statusMap = {
-    complete: { label: "完了", tone: "text-emerald-300", icon: <CheckCircle2 className="h-4 w-4" /> },
-    in_progress: { label: "進行中", tone: "text-cyan-300", icon: <TimerReset className="h-4 w-4" /> },
+    complete: { label: "完了", tone: "text-emerald-500", icon: <CheckCircle2 className="h-4 w-4" /> },
+    in_progress: { label: "進行中", tone: "text-sky-500", icon: <TimerReset className="h-4 w-4" /> },
     pending: { label: "未着手", tone: "text-slate-400", icon: <Flag className="h-4 w-4" /> },
   } as const;
 
   const status = statusMap[task.status];
 
   return (
-    <div className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-3 py-2">
+    <div className="flex items-center gap-3 rounded-xl border border-slate-100 bg-white px-3 py-2 shadow-sm">
       <div className={`${status.tone}`}>{status.icon}</div>
-      <p className="flex-1 text-sm text-white/80">{task.title}</p>
+      <p className="flex-1 text-sm text-slate-600">{task.title}</p>
       <span className={`text-[10px] font-bold uppercase tracking-wider ${status.tone}`}>{status.label}</span>
     </div>
   );
@@ -514,21 +499,21 @@ function TaskItem({ task }: { task: Task }) {
 
 function MilestoneItem({ milestone }: { milestone: Milestone }) {
   const statusMap = {
-    complete: { label: "完了", tone: "text-emerald-300", icon: <CheckCircle2 className="h-5 w-5" /> },
-    delayed: { label: "遅延", tone: "text-red-300", icon: <AlertTriangle className="h-5 w-5" /> },
-    pending: { label: "予定", tone: "text-amber-300", icon: <TimerReset className="h-5 w-5" /> },
+    complete: { label: "完了", tone: "text-emerald-500", icon: <CheckCircle2 className="h-5 w-5" /> },
+    delayed: { label: "遅延", tone: "text-red-400", icon: <AlertTriangle className="h-5 w-5" /> },
+    pending: { label: "予定", tone: "text-amber-500", icon: <TimerReset className="h-5 w-5" /> },
   } as const;
 
   const status = statusMap[milestone.status];
 
   return (
-    <div className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
-      <div className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-white/5 ${status.tone}`}>
+    <div className="flex items-center gap-4 rounded-2xl border border-slate-100 bg-white px-4 py-3 shadow-sm">
+      <div className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-50 ${status.tone}`}>
         {status.icon}
       </div>
       <div className="flex-1">
-        <p className="text-sm font-semibold text-white/90">{milestone.title}</p>
-        <p className="text-xs text-white/50">{milestone.time}</p>
+        <p className="text-sm font-semibold text-slate-800">{milestone.title}</p>
+        <p className="text-xs text-slate-400">{milestone.time}</p>
       </div>
       <span className={`text-xs font-bold uppercase tracking-[0.4em] ${status.tone}`}>{status.label}</span>
     </div>
@@ -541,7 +526,7 @@ function UrgencyBadge({ urgency }: { urgency: UrgencyVariant }) {
       <AlarmClock className={`h-4 w-4 ${urgency.textColor}`} />
       <div>
         <p className={`text-xs uppercase tracking-[0.4em] ${urgency.textColor}`}>残り時間サイン</p>
-        <p className="text-sm font-bold text-white">{urgency.label}</p>
+        <p className="text-sm font-bold text-slate-900">{urgency.label}</p>
       </div>
     </div>
   );
@@ -602,28 +587,28 @@ function ActivityStatusCard({ state }: { state: ActivityState }) {
           👩‍💻
         </span>
         <div>
-          <div className="flex items-center gap-2 text-lg font-semibold text-white">
+          <div className="flex items-center gap-2 text-lg font-semibold text-slate-900">
             <span className={`h-2.5 w-2.5 rounded-full ${indicatorClass}`} />
             {statusLabel}
           </div>
-          <p className="text-xs text-slate-400">{helper}</p>
+          <p className="text-xs text-slate-500">{helper}</p>
         </div>
       </div>
-      <dl className="mt-6 space-y-3 text-sm text-slate-100">
+      <dl className="mt-6 space-y-3 text-sm text-slate-600">
         <div className="flex items-baseline justify-between">
-          <dt className="text-slate-300">キー入力速度</dt>
-          <dd className="text-2xl font-black text-white">
+          <dt className="text-slate-500">キー入力速度</dt>
+          <dd className="text-2xl font-black text-slate-900">
             {keystrokesDisplay} <span className="ml-1 text-xs font-normal text-slate-400">回/10分</span>
           </dd>
         </div>
         <div className="flex items-baseline justify-between">
-          <dt className="text-slate-300">クリック数</dt>
-          <dd className="text-2xl font-black text-white">
+          <dt className="text-slate-500">クリック数</dt>
+          <dd className="text-2xl font-black text-slate-900">
             {clicksDisplay} <span className="ml-1 text-xs font-normal text-slate-400">回/10分</span>
           </dd>
         </div>
       </dl>
-      <p className="mt-4 text-right text-xs font-mono text-slate-400">{lastUpdateText}</p>
+      <p className="mt-4 text-right text-xs font-mono text-slate-500">{lastUpdateText}</p>
     </>
   );
 }
@@ -653,8 +638,8 @@ function ActivityVideo({ src, caption }: { src: string; caption: string }) {
     aspectRatio !== null ? { aspectRatio: aspectRatio / 0.6 } : { minHeight: "200px" };
 
   return (
-    <div className="rounded-2xl border border-white/10 bg-black/40">
-      <div className="relative w-full overflow-hidden rounded-t-2xl bg-black" style={containerStyle}>
+    <div className="rounded-2xl border border-orange-100 bg-white shadow-sm">
+      <div className="relative w-full overflow-hidden rounded-t-2xl bg-orange-50" style={containerStyle}>
         <video
           key={src}
           ref={videoRef}
@@ -666,9 +651,9 @@ function ActivityVideo({ src, caption }: { src: string; caption: string }) {
           className="absolute inset-0 h-full w-full object-cover"
         />
       </div>
-      <div className="flex items-center justify-between border-t border-white/5 px-4 py-2 text-xs text-slate-300">
+      <div className="flex items-center justify-between border-t border-orange-50 px-4 py-2 text-xs text-slate-500">
         <span>{caption}</span>
-        <span className="font-mono uppercase tracking-[0.3em] text-slate-500">STATUS</span>
+        <span className="font-mono uppercase tracking-[0.3em] text-slate-400">STATUS</span>
       </div>
     </div>
   );

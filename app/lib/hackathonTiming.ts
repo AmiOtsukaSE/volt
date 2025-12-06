@@ -51,35 +51,35 @@ export function getUrgencyVariant(hoursLeft: number): UrgencyVariant {
   if (hoursLeft <= 1) {
     return {
       label: "最終警戒 — ラスト1時間",
-      textColor: "text-red-400",
-      badgeBg: "bg-red-500/10",
-      badgeBorder: "border-red-500/40",
-      barColor: "#ff4d4d",
+      textColor: "text-rose-500",
+      badgeBg: "bg-rose-50",
+      badgeBorder: "border-rose-200",
+      barColor: "#f43f5e",
     };
   }
   if (hoursLeft <= 6) {
     return {
       label: "警戒レベル黄 — 残り6時間未満",
-      textColor: "text-amber-300",
-      badgeBg: "bg-amber-500/10",
-      badgeBorder: "border-amber-300/40",
-      barColor: "#facc15",
+      textColor: "text-amber-500",
+      badgeBg: "bg-amber-50",
+      badgeBorder: "border-amber-200",
+      barColor: "#fbbf24",
     };
   }
   if (hoursLeft <= 24) {
     return {
       label: "集中ゾーン — 残り24時間未満",
-      textColor: "text-cyan-300",
-      badgeBg: "bg-cyan-500/10",
-      badgeBorder: "border-cyan-300/40",
-      barColor: "#22d3ee",
+      textColor: "text-sky-500",
+      badgeBg: "bg-sky-50",
+      badgeBorder: "border-sky-200",
+      barColor: "#38bdf8",
     };
   }
   return {
     label: "安定走行",
-    textColor: "text-emerald-300",
-    badgeBg: "bg-emerald-500/10",
-    badgeBorder: "border-emerald-400/40",
+    textColor: "text-emerald-500",
+    badgeBg: "bg-emerald-50",
+    badgeBorder: "border-emerald-200",
     barColor: "#34d399",
   };
 }
