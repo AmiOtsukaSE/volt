@@ -41,6 +41,15 @@ const milestones = [
   },
 ];
 
+const tasks = [
+  { title: "制作するものの概要を作る", status: "pending" as const },
+  { title: "ハッカソンの概要を理解する", status: "pending" as const },
+  { title: "簡単な計画を作成する", status: "pending" as const },
+  { title: "書いたコード数が自動で表示されるようにする", status: "pending" as const },
+  { title: "書いた文章の行数を手動で登録できるようにする", status: "pending" as const },
+  { title: "キーボードのタイプ数やマウスのクリック数の計測", status: "pending" as const },
+];
+
 const resources = [
   { label: "GitHubリポジトリ", href: "https://github.com/AmiOtsukaSE/volt", icon: Github },
   { label: "ハッカソン概要ページ", href: "https://lablab.ai/event/qubic-hack-the-future", icon: Trophy },
@@ -157,8 +166,10 @@ export default function Home() {
                 <h2 className="text-xl font-bold">ステータス一覧</h2>
               </div>
             </div>
-            <div className="mt-6 flex-1 rounded-2xl border border-white/10 bg-white/5 px-4 py-10 text-center text-sm text-white/50">
-              データ待ち
+            <div className="mt-6 space-y-2">
+              {tasks.map((task) => (
+                <TaskItem key={task.title} task={task} />
+              ))}
             </div>
           </section>
         </div>
@@ -349,6 +360,26 @@ function CountdownTicker({ units, urgency }: { units: CountdownUnit[]; urgency: 
           <span className="text-sm font-semibold text-white/60">{unit.label}</span>
         </div>
       ))}
+    </div>
+  );
+}
+
+type Task = (typeof tasks)[number];
+
+function TaskItem({ task }: { task: Task }) {
+  const statusMap = {
+    complete: { label: "完了", tone: "text-emerald-300", icon: <CheckCircle2 className="h-4 w-4" /> },
+    in_progress: { label: "進行中", tone: "text-cyan-300", icon: <TimerReset className="h-4 w-4" /> },
+    pending: { label: "未着手", tone: "text-slate-400", icon: <Flag className="h-4 w-4" /> },
+  } as const;
+
+  const status = statusMap[task.status];
+
+  return (
+    <div className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-3 py-2">
+      <div className={`${status.tone}`}>{status.icon}</div>
+      <p className="flex-1 text-sm text-white/80">{task.title}</p>
+      <span className={`text-[10px] font-bold uppercase tracking-wider ${status.tone}`}>{status.label}</span>
     </div>
   );
 }
